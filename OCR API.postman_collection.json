@@ -1,0 +1,23 @@
+{
+  "info": {
+    "_userman_id": "60ad02cb-0c0c-4dc9-83f9-dc3f4042d6bf",
+    "name": "Ocr API",
+    "schema": "https://schema.getuserman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "upload image for ocr",
+      "request": {
+        "method": "Post",
+        "header": [],
+        "url": {
+          "raw": "localhost:8000/ocr",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["ocr"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
