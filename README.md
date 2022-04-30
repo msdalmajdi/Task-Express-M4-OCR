@@ -6,6 +6,10 @@
 
 In this task, you will create a cool api that takes an image and returns the text inside. Aka OCR, Image to Text.
 
+![test](https://user-images.githubusercontent.com/84308096/166109225-c92c0ef5-cda1-42d7-9814-b860b148f2bb.png)
+
+Use this image for testing
+
 ### Setup Media Folder
 
 Create a route for the media files.
