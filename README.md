@@ -1,33 +1,81 @@
-# TASK-NAME
-
-This is the template for tasks. These repos are the starting points and instructions for students to explore a concept.
+# OCR API 🤖
 
 ## Instructions
-- Fork and clone [this repository](https://github.com/JoinCODED/{REPO_NAME}) to your `Development` folder.
 
-## Objective and end result
-- Write the objective of the task.
-- If there are any images, make sure you resize them to around 880px maximum width. **Don't add big images**
+- Fork and clone [this repository](https://github.com/JoinCODED/Task-Express-M4-OCR/) to your `Development` folder.
 
-![screenshot](https://tenor.com/xNjE.gif)
+In this task, you will create a cool api that takes an image and returns the text inside. Aka OCR, Image to Text.
 
+### Setup Media Folder
 
-### 🍋 The basic challenge title
+Create a route for the media files.
 
-- Step 1
-- Step 2
-- Step 3
+1. Create a folder called `media` for your images.
+2. In `app.js`, create a route with the path `/media`.
+3. Join `media` to the directory path `__dirname` using `join` and pass it to `express.static`.
+4. Test your route by putting any image in the `media` folder, then in your browser go to `localhost:8000/media/<image_name>`.
+5. Add `media` to your `.gitignore` file.
 
+### Setup Upload Middleware
 
-### 🤼‍♂️ The hard challenge title
+Set up the upload middleware using multer.
 
-- Step 1
-- Step 2
-- Step 3
+1. Install multer
 
+```shell
+$ npm install multer
+```
 
-### 🌶 The Extreme challenge title 
+2. In your `middleware` folder (create one if you don't have it), create a file called `multer.js`.
 
-- Step 1
-- Step 2
-- Step 3
+3. In this file `multer.js`, copy paste the following code:
+
+```js
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: './media',
+  filename: (req, file, cb) => {
+    cb(null, `${+new Date()}${file.originalname}`);
+  },
+});
+
+const upload = multer({
+  storage,
+});
+
+module.exports = upload;
+```
+
+4. In `ocr/ocr.routes.js`, require `upload`.
+
+```js
+const upload = require('../../middleware/multer');
+```
+
+5. Call `upload` middleware before the `ocrCreate` controller.
+
+6. Specify that `single` images are uploaded only and the field name is `image`.
+
+### Uploading Images
+
+1. In `ocrCreate` controller method, check if an image was uploaded by checking if `req.file` exists.
+2. If a file is uploaded, save the path in the body of the URL.
+3. The path must include the request's protocol `http` and the host `req.get("host")` followed by `media` and the file's name.
+
+### OCR!
+
+1. Use the following (package)[https://www.npmjs.com/package/tesseract.js/v/2.1.1]
+2. The rest is a challenge!
+
+### 🍋 Multer Size Limit
+
+In `multer.js` specify a size limit of 1 megabyte for the files uploaded.
+
+### 🤼‍♂️ Multer File Filter
+
+In `multer.js` specify a the file types which are allowed to upload, we need to only upload images!
+
+### 🌶 Back To React
+
+Create a front end page for your ocr api!
